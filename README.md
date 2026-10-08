@@ -1,5 +1,7 @@
 # Comic Studio Starter
 
+**한국어** · [English](README.en.md)
+
 메모 한 줄을 4~6컷 만화로 바꾸는 **작업실의 뼈대**입니다. 완성품이 아니라 — 가져가서 자기 말투·그림체·워크플로에 맞게 고쳐 쓰세요.
 A starter skeleton for turning a rough memo into a short comic: LLM storyboard planning → hand-edited lettering → 1080×1350 slide export. Fork it, bend it.
 
