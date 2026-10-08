@@ -2311,3 +2311,9 @@ a.export-option {
   white-space: nowrap;
   text-wrap: nowrap;
 }
+
+/* Scene board: swipe left/right only on small screens (no vertical swipe through slides) */
+@media (max-width: 990px) {
+  .scene-grid { display: flex; gap: 14px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; touch-action: pan-x; overscroll-behavior-x: contain; padding-bottom: 10px; }
+  .scene-grid > .scene-card { flex: 0 0 min(82%, 360px); scroll-snap-align: center; }
+}
