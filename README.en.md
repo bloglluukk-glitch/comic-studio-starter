@@ -5,7 +5,7 @@
 A skeleton workshop that turns a rough memo into a 4–6 panel comic. This is a **super-sample, not a finished product**: take it, then bend it to your own voice, art style and workflow.
 Flow: LLM storyboard planning → hand-edited lettering → 1080×1350 slide export.
 
-> Heads-up: the UI text and the planner prompts are written in Korean. The structure is language-agnostic; translate the strings in `client/` and `engine/planner.mjs` for your own language.
+> The UI, error messages and planner prompts are in English, and the planner replies in the language of your memo (Korean memos work too). The original Korean UI is kept on the [`ko` branch](https://github.com/bloglluukk-glitch/comic-studio-starter/tree/ko).
 
 ## What's inside
 
@@ -17,7 +17,7 @@ Flow: LLM storyboard planning → hand-edited lettering → 1080×1350 slide exp
 | `engine/export.mjs` | One 1080×1350 PNG per panel, plus a ZIP |
 | `shared/lettering.mjs` | Speech-bubble auto layout, tails, text sizing |
 | `client/` | React editing UI (bundled with esbuild) |
-| `tests/` | 29 tests via `node --test` (some fixtures are intentionally Korean to cover non-English memos) |
+| `tests/` | 29 tests via `node --test` (some fixtures are intentionally Korean to cover non-English memos) (some fixtures are intentionally Korean to cover non-English memos) |
 | `examples/` | Sample memo and sample series profile |
 
 ## Run

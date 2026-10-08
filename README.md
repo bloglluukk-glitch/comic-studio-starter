@@ -5,7 +5,7 @@
 메모 한 줄을 4~6컷 만화로 바꾸는 **작업실의 뼈대**입니다. 완성품이 아니라 — 가져가서 자기 말투·그림체·워크플로에 맞게 고쳐 쓰세요.
 A starter skeleton for turning a rough memo into a short comic: LLM storyboard planning → hand-edited lettering → 1080×1350 slide export. Fork it, bend it.
 
-> 기본 UI·오류 메시지·프롬프트는 **영어**로 바뀌었습니다. AI는 메모의 언어(한국어 포함)로 답합니다. 원래 한국어 UI는 [`ko` 브랜치](../../tree/ko)에 있어요.
+> 기본 UI·오류 메시지·프롬프트는 **영어**로 바뀌었습니다. AI는 메모의 언어(한국어 포함)로 답합니다. 원래 한국어 UI는 [`ko` 브랜치](https://github.com/bloglluukk-glitch/comic-studio-starter/tree/ko)에 있어요.
 
 ## 들어 있는 것 / What's inside
 
