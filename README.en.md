@@ -17,7 +17,7 @@ Flow: LLM storyboard planning → hand-edited lettering → 1080×1350 slide exp
 | `engine/export.mjs` | One 1080×1350 PNG per panel, plus a ZIP |
 | `shared/lettering.mjs` | Speech-bubble auto layout, tails, text sizing |
 | `client/` | React editing UI (bundled with esbuild) |
-| `tests/` | 29 tests via `node --test` |
+| `tests/` | 29 tests via `node --test` (some fixtures are intentionally Korean to cover non-English memos) |
 | `examples/` | Sample memo and sample series profile |
 
 ## Run

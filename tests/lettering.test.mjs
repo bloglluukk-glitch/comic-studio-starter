@@ -37,7 +37,7 @@ test('lettering validation rejects junk at the save boundary',()=>{
  for(const bad of [[],{evil:{}},{caption:{x:'1'}},{caption:{x:9}},{caption:{size:'xl'}},{'speech-0':{type:'shout'}},{caption:{x:.5,onload:'x'}}])
   assert.equal(validateLettering(bad,'1컷').length,1,JSON.stringify(bad));
  const project=makeProject({panels:[makePanel({id:'p1',title:'t',action:'a',composition:'c',visualPrompt:'v',sourceNote:'s',poseAssetId:'missing'})]});
- assert.ok(validateProject(project).some(e=>/구도 스케치/.test(e)));
+ assert.ok(validateProject(project).some(e=>/composition sketch/.test(e)));
 });
 
 test('AI one-panel revision keeps lettering, image request and pose sketch',()=>{
@@ -65,9 +65,9 @@ test('series palette is validated and pins colours in every image prompt',async(
   assert.equal(validateProfile({...profile,palette:bad}).length,1,JSON.stringify(bad));
  assert.deepEqual(validateProfile({...profile,palette:undefined}),[],'older series without a palette stay valid');
  const panel=makePanel({imageIntent:'표정만'});
- assert.match(imagePrompt({},profile,panel),/use ONLY these flat colours.*셔츠 #9FB4C8, 색 #A7B89A/);
+ assert.match(imagePrompt({},profile,panel),/use ONLY these flat colours.*셔츠 #9FB4C8, Color #A7B89A/);
  assert.match(imageEditPrompt(profile,panel),/셔츠 #9FB4C8/);
- assert.match(panelDrawingRequest(makeProject(),profile,panel),/색 팔레트: 셔츠 #9FB4C8/);
+ assert.match(panelDrawingRequest(makeProject(),profile,panel),/Color palette: 셔츠 #9FB4C8/);
  assert.doesNotMatch(imagePrompt({},{...profile,palette:[]},panel),/colour palette/);
 });
 
@@ -85,7 +85,7 @@ test('comedy direction reaches the planner, and gag panels get a blank sign in t
  const {planSchema}=await import('../shared/contract.mjs');
  const project=makeProject({raw:'너무 지쳤다',profileId:'s'}),profile={name:'s',voice:'',context:'',style:'',avoid:'',characterNotes:''};
  const prompt=buildPrompt({project,profile,request:{},referenceImages:[{id:'g',role:'gag',name:'hanger.jpg'}]});
- assert.match(prompt,/COMEDY DIRECTION/);assert.match(prompt,/비유 그대로/);assert.match(prompt,/Exactly 2 panels EXPLODE/);assert.match(prompt,/Never put the two gag panels next to each other/);assert.match(prompt,/push face and body acting one notch/);
+ assert.match(prompt,/COMEDY DIRECTION/);assert.match(prompt,/Literal metaphor/);assert.match(prompt,/Exactly 2 panels EXPLODE/);assert.match(prompt,/Never put the two gag panels next to each other/);assert.match(prompt,/push face and body acting one notch/);
  assert.match(prompt,/TASK: Create a complete story/,'TASK line still renders after the new section');
  assert.match(prompt,/"role":"gag"/);
  assert.ok(planSchema.properties.panels.items.required.includes('signText'),'AI must return signText');

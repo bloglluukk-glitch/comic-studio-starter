@@ -79,7 +79,7 @@ export function bubbleShapes(b,seed=''){
 const LAYOUT_FIELDS=['x','y','w','tx','ty','size','type'];
 export function validateLettering(value,label){
  if(value===undefined)return [];
- const bad=[label+' 말풍선 배치가 올바르지 않습니다.'];
+ const bad=[label+' bubble layout is invalid.'];
  if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).length>MAX_SPEECH+2)return bad;
  for(const [key,v]of Object.entries(value)){
   if(!/^(caption|sign|speech-\d{1,2})$/.test(key)||!v||typeof v!=='object'||Array.isArray(v)||Object.keys(v).some(k=>!LAYOUT_FIELDS.includes(k)))return bad;

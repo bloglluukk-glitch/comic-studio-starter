@@ -233,7 +233,7 @@ test('edit mode needs an existing picture and a written request, then passes edi
  const sketch=await uploadSketch(req,project.id,'a.png');
  const current=(await req(`/api/projects/${project.id}`)).body;
  await setPanels(req,project,current.panels.map(p=>p.id==='panel_a'?{...p,sketchAssetId:sketch.id}:p));
- assert.match((await req(`/api/projects/${project.id}/plan`,'POST',{mode:'images',panelId:'panel_a',edit:true})).body.error,/그림 요청/);
+ assert.match((await req(`/api/projects/${project.id}/plan`,'POST',{mode:'images',panelId:'panel_a',edit:true})).body.error,/picture request/);
  const latest=(await req(`/api/projects/${project.id}`)).body;
  await setPanels(req,project,latest.panels.map(p=>p.id==='panel_a'?{...p,imageIntent:'표정만 바꾸기'}:p));
  const done=await waitJob(req,(await req(`/api/projects/${project.id}/plan`,'POST',{mode:'images',panelId:'panel_a',edit:true})).body.id);

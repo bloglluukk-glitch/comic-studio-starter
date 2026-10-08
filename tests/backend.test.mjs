@@ -34,7 +34,7 @@ test('durable save, optimistic revision, restore, reload, health and origin chec
  assert.equal((await req('/api/projects/'+project.id,'PATCH',{title:'충돌',expectedRevision:project.revision})).status,409);
  const restored=(await req(`/api/projects/${project.id}/restore`,'POST',{revisionId:firstRevision,expectedRevision:edited.revision})).body;assert.equal(restored.title,'테스트 이야기');
  const loaded=await new Store(dataDir).init();assert.equal(loaded.getProject(project.id).title,'테스트 이야기');assert.equal(loaded.getProfile(profile.id).name,profile.name);
- const health=await req('/api/health');assert.deepEqual(health.body.imageGeneration,{available:false,detail:'그림 요청서와 레퍼런스를 내보내거나 완성된 그림을 가져올 수 있습니다.'});
+ const health=await req('/api/health');assert.deepEqual(health.body.imageGeneration,{available:false,detail:'Export the picture request and references, or import a finished picture.'});
  assert.equal((await req('/api/projects','POST',{}, {Origin:'https://evil.invalid'})).status,403);
  assert.equal(store.getProject(project.id).raw,project.raw);
 });
@@ -84,6 +84,6 @@ test('global worker, cancellation, profile busy guard and retry are durable',asy
 test('restart marks queued and running jobs interrupted without running them again',async t=>{
  const root=await mkdtemp(path.join(os.tmpdir(),'comic-restart-'));t.after(()=>rm(root,{recursive:true,force:true}));const store=await new Store(root).init();const profile=await store.createProfile({});const project=await store.createProject({raw:'재시작 테스트',profileId:profile.id});
  project.jobs.push({id:'job_running',projectId:project.id,status:'running',stage:'planning',progress:25,message:'진행 중',events:[],request:{mode:'plan',instruction:'',model:'auto'},sourceRevision:project.revision,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()});await store.saveProject(project);
- const fresh=await new Store(root).init(),job=fresh.getProject(project.id).jobs[0];assert.equal(job.status,'interrupted');assert.match(job.error,/서버가 종료/);assert.ok(job.events.at(-1).message.includes('중단'));
+ const fresh=await new Store(root).init(),job=fresh.getProject(project.id).jobs[0];assert.equal(job.status,'interrupted');assert.match(job.error,/server shut down/);assert.ok(job.events.at(-1).message.includes('stopped'));
  const persisted=JSON.parse(await readFile(path.join(fresh.projectDir(project.id),'project.json'),'utf8'));assert.equal(persisted.jobs[0].status,'interrupted');
 });
